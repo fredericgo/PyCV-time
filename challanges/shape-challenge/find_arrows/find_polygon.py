@@ -32,7 +32,7 @@ def isArrow(heptagon):
             ps = heptagon[s, 0]
             pe = heptagon[e, 0]
             pd = heptagon[f, 0]
-            if angle(ps, pd, pe) < 120:
+            if angle(ps, pd, pe) < 100:
                 return True    
 
         return False
@@ -75,7 +75,7 @@ def imgproc(frame):
     
     # Modify these code to suit your need
     contours = [ctr for ctr in contours if cv2.contourArea(ctr) > 100]
-    contours = [cv2.approxPolyDP(ctr, 5, True) for ctr in contours]
+    contours = [cv2.approxPolyDP(ctr, 7, True) for ctr in contours]
     heptagons = [ctr for ctr in contours if len(ctr) == 7]
     arrows = [hepta for hepta in heptagons if isArrow(hepta)]
     #tips = [ tip(a) for a in arrows ]
@@ -95,4 +95,4 @@ def imgproc(frame):
     return frame
 
 if __name__ == "__main__":
-    webcam_gui(imgproc, 1)
+    webcam_gui(imgproc, 0)
